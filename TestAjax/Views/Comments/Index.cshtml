@@ -5,16 +5,16 @@
     <div class="row">
     </div>
 
-
+<h4>Add Comments</h4>
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
             @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>Add Comments</h4>
+                    
                     
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -34,13 +34,12 @@
                 </div>
             }
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
 
             <div class="row">
+                <div class="form-horizontal">
+                    <div id="dvSearchComments" class="col-md-offset-2 col-md-10">
 
-                <div class="col-md-offset-2 col-md-10">
-
-                    <div id="dvSearchComments">
                         @using (Ajax.BeginForm("SearchByComment", "Comments", new AjaxOptions
             {
                 InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
@@ -59,30 +58,27 @@
                                             <button id="btnSearch" class="btn btn-default" type="submit">Search</button>
                                         </div>
                                     </td>
-     
+
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default" onClick="SampleException()" title="Exception Sample">Try Exception</button>
-</div></td>
-                                </tr>
+
                             </table>
-
-
-
                         }
                     </div>
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <button type="button" class="btn btn-default" onClick="SampleException()" title="Exception Sample">Try Exception</button>
+
+
+                    </div>
+ </div>
 
                 </div>
-
-            </div>
         </div>
         
     </div>
 </div>
 
-    
+  
 <hr />
     <div id='myModal' class='modal fade in'>
         <div class="modal-dialog">
@@ -92,9 +88,7 @@
         </div>
     </div>
 
-    @*<div class="row" style="overflow-y: scroll;  height: 400px;">*@
-
-<div >
+<div  class="FixedHeight">
     <div class="col-md-offset-2 col-md-10" id="replacetargetid">
 
         @Html.Partial("_List", @Model.List);
@@ -106,14 +100,13 @@
         function DeleteData(Id) {
             debugger;
             $.ajax({
-                url: '@Url.Action("DeleteConfirmedAjax", "Comments")',
+                url: '@Url.Action("DeleteConfirmed", "Comments")',
                 type: 'POST',
                 data: { id :Id},
                 success: function (result) {
                     debugger;
                     if (result.success) {
                         debugger;
-                        //$('#myModal').modal('hide');
                         $('#replacetargetid').load(result.url); //  Load data from the server and place the returned HTML into the matched element
                     }
                 }
@@ -134,44 +127,6 @@
                 }
             });
             return false;
-        }
-
-        $(function () {
-            $.ajaxSetup({ cache: false });
-
-            $("a[data-modal]").on("click", function (e) {
-                // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
-                //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
-
-                $('#myModalContent').load(this.href, function () {
-                    $('#myModal').modal({
-                        /*backdrop: 'static',*/
-                        keyboard: true
-                    }, 'show');
-                    bindForm(this);
-                });
-                return false;
-            });
-        });
-
-        function bindForm(dialog) {
-            $('form', dialog).submit(function () {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (result) {
-                        if (result.success) {
-                            $('#myModal').modal('hide');
-                            $('#replacetargetid').load(result.url); //  Load data from the server and place the returned HTML into the matched element
-                        } else {
-                            $('#myModalContent').html(result);
-                            bindForm(dialog);
-                        }
-                    }
-                });
-                return false;
-            });
         }
 
     </script>

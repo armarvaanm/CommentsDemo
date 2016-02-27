@@ -87,19 +87,8 @@ namespace CommentsDemo.Controllers
             
             return PartialView();
         }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-
-            _serv = new CommentsApiController();
-            _serv.DeleteCommentsModal(id);
-
-            string url = Url.Action("GetComments", "Comments");
-            return Json(new { success = true, url = url });
-        }
-        public async Task<ActionResult> DeleteConfirmedAjax(int id)
+        
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             string url = Url.Action("GetComments", "Comments");
             try

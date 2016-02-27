@@ -1,0 +1,10 @@
+﻿.FixedHeight
+{
+  height: 250px;
+ }
+.Content
+{
+  height:224px;
+   overflow:auto;
+    background:#fff;
+}

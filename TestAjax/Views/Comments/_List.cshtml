@@ -1,51 +1,52 @@
 ﻿
 @using CommentsDemo.Helpers
 @model IEnumerable<CommentsDemo.Models.CommentsViewModal>
-<div id="dvCommentsList" ><div class="panel panel-default" >
-    <div class="panel-heading">
-        <strong>Comments List</strong>
-    </div>
+<div id="dvCommentsList" style="overflow-y: auto;  height: 300px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Comments List</strong>
+        </div>
 
-    <table class="table table-hover"style="overflow-y:scroll; height:100px;">
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommentCreatedDate)
-            </th>
-
-            @*<th>
-                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add", "Create", "Addresses", routeValues: new { PersonId = ViewBag.PersonID }, htmlAttributes: new { data_modal = "", @class = "btn btn-primary pull-right" })
-                </th>*@
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <table class="table table-hover">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommentCreatedDate)
-                </td>
-                <td>
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-danger" onClick="DeleteData(@item.CommentId)" >Delete</button>
 
-                    </div>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommentCreatedDate)
+                </th>
+
+                @*<th>
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add", "Create", "Addresses", routeValues: new { PersonId = ViewBag.PersonID }, htmlAttributes: new { data_modal = "", @class = "btn btn-primary pull-right" })
+                    </th>*@
             </tr>
-        }
-    </table>
 
-</div>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CommentCreatedDate)
+                    </td>
+                    <td>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-danger" onClick="DeleteData(@item.CommentId)">Delete</button>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
 </div>
 
